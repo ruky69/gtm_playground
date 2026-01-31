@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GTM Test Playground</title>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End GTM -->
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    button { margin: 10px 0; padding: 10px 16px; }
+    input, select { padding: 8px; margin: 6px 0; }
+    .box { margin-bottom: 24px; border: 1px solid #ddd; padding: 20px; }
+  </style>
+</head>
+
+<body>
+
+<h1>GTM Test Playground</h1>
+
+<div class="box">
+  <h2>Button Click</h2>
+  <button id="cta-btn">Click Me</button>
+</div>
+
+<div class="box">
+  <h2>Custom DataLayer Event</h2>
+  <button onclick="pushCustomEvent()">Push Event</button>
+</div>
+
+<div class="box">
+  <h2>Form Submit</h2>
+  <form id="test-form">
+    <input type="email" name="email" placeholder="Email" required />
+    <select name="plan">
+      <option value="free">Free</option>
+      <option value="pro">Pro</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div class="box">
+  <h2>Outbound Link</h2>
+  <a href="https://example.com" target="_blank">External Link</a>
+</div>
+
+<script>
+  function pushCustomEvent() {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'custom_test_event',
+      feature: 'export_csv',
+      plan: 'pro'
+    });
+    alert('custom_test_event pushed to dataLayer');
+  }
+
+  document.getElementById('test-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    window.dataLayer.push({
+      event: 'form_submit',
+      email: e.target.email.value,
+      plan: e.target.plan.value
+    });
+    alert('form_submit event pushed');
+  });
+</script>
+
+<!-- GTM noscript -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+</body>
+</html>
