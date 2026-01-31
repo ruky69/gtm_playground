@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>GTM Test Playground</title>
 
   <!-- Google Tag Manager -->
@@ -10,76 +11,498 @@
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+    })(window,document,'script','dataLayer','GTM-WHKBQ57C');
   </script>
   <!-- End GTM -->
 
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; }
-    button { margin: 10px 0; padding: 10px 16px; }
-    input, select { padding: 8px; margin: 6px 0; }
-    .box { margin-bottom: 24px; border: 1px solid #ddd; padding: 20px; }
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.7);
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(56,189,248,.18), transparent 60%),
+                  radial-gradient(900px 500px at 80% 40%, rgba(34,197,94,.14), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      padding: 40px 18px;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 8px;
+    }
+
+    h1{
+      font-size: 28px;
+      margin: 0 0 6px;
+      letter-spacing: .2px;
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 62ch;
+    }
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .card h2{
+      font-size: 16px;
+      margin: 0 0 10px;
+      color: rgba(255,255,255,.9);
+    }
+
+    .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button{
+      appearance:none;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    button:hover{ background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); }
+    button:active{ transform: translateY(1px); }
+
+    .btn-primary{
+      border-color: rgba(34,197,94,.45);
+      background: linear-gradient(180deg, rgba(34,197,94,.25), rgba(34,197,94,.08));
+    }
+
+    .btn-warn{
+      border-color: rgba(251,191,36,.45);
+      background: linear-gradient(180deg, rgba(251,191,36,.22), rgba(251,191,36,.08));
+    }
+
+    .btn-danger{
+      border-color: rgba(239,68,68,.45);
+      background: linear-gradient(180deg, rgba(239,68,68,.22), rgba(239,68,68,.08));
+    }
+
+    input, select{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      min-width: 220px;
+      outline: none;
+    }
+    input::placeholder{ color: rgba(255,255,255,.55); }
+
+    label{
+      color: var(--muted);
+      font-size: 13px;
+      display:block;
+      margin-bottom: 6px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 8px 0;
+      min-width: 240px;
+    }
+
+    .small{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .console{
+      background: rgba(0,0,0,.35);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      height: 420px;
+      overflow:auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+    }
+    .logline{ margin: 0 0 8px; }
+    .tag{
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      margin-right: 8px;
+      color: rgba(255,255,255,.8);
+    }
+    .muted{ color: rgba(255,255,255,.65); }
+    .divider{
+      height:1px;
+      background: var(--border);
+      margin: 12px 0;
+    }
+    .footer{
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 18px 0;
+    }
+
+    a{ color: rgba(56,189,248,.95); }
   </style>
 </head>
 
 <body>
+  <!-- GTM noscript -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHKBQ57C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
-<h1>GTM Test Playground</h1>
+  <div class="wrap">
+    <header class="card">
+      <div>
+        <h1>GTM Test Playground</h1>
+        <p class="subtitle">
+          A safe sandbox for testing tags, triggers, variables, ecommerce, and custom dataLayer events.
+          Use GTM Preview to see exactly what fires.
+        </p>
+      </div>
+      <div class="pill">
+        <span>dataLayer events:</span>
+        <span id="eventCount" style="color:rgba(255,255,255,.9);font-weight:700;">0</span>
+      </div>
+    </header>
 
-<div class="box">
-  <h2>Button Click</h2>
-  <button id="cta-btn">Click Me</button>
-</div>
+    <div class="grid">
+      <!-- LEFT: Controls -->
+      <div class="card">
+        <h2>1) Basics</h2>
+        <div class="row">
+          <button id="cta-btn" class="btn-primary">CTA Click</button>
+          <button onclick="pushCustomEvent()" class="btn-warn">Push Custom Event</button>
+          <a href="https://example.com" target="_blank" rel="noopener">Outbound Link → example.com</a>
+        </div>
 
-<div class="box">
-  <h2>Custom DataLayer Event</h2>
-  <button onclick="pushCustomEvent()">Push Event</button>
-</div>
+        <div class="divider"></div>
 
-<div class="box">
-  <h2>Form Submit</h2>
-  <form id="test-form">
-    <input type="email" name="email" placeholder="Email" required />
-    <select name="plan">
-      <option value="free">Free</option>
-      <option value="pro">Pro</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
-</div>
+        <h2>2) Auth Events (Signup / Login)</h2>
 
-<div class="box">
-  <h2>Outbound Link</h2>
-  <a href="https://example.com" target="_blank">External Link</a>
-</div>
+        <form id="signup-form" autocomplete="off">
+          <div class="row">
+            <div class="field">
+              <label>Signup Email</label>
+              <input type="email" name="email" placeholder="name@email.com" required />
+            </div>
 
-<script>
-  function pushCustomEvent() {
+            <div class="field">
+              <label>Plan</label>
+              <select name="plan">
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+              </select>
+            </div>
+
+            <div class="field" style="min-width:180px;">
+              <label>&nbsp;</label>
+              <button type="submit" class="btn-primary">Signup</button>
+            </div>
+          </div>
+        </form>
+
+        <form id="login-form" autocomplete="off">
+          <div class="row">
+            <div class="field">
+              <label>Login Email</label>
+              <input type="email" name="email" placeholder="name@email.com" required />
+            </div>
+
+            <div class="field">
+              <label>Method</label>
+              <select name="method">
+                <option value="password">Password</option>
+                <option value="magic_link">Magic Link</option>
+                <option value="google">Google</option>
+                <option value="apple">Apple</option>
+              </select>
+            </div>
+
+            <div class="field" style="min-width:180px;">
+              <label>&nbsp;</label>
+              <button type="submit">Login</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="divider"></div>
+
+        <h2>3) Ecommerce Events (GA4 style)</h2>
+        <p class="small">
+          These pushes follow GA4 ecommerce structures (<span class="muted">items[], currency, value, transaction_id</span>).
+          Use them to test GA4 event tags + parameter mapping in GTM.
+        </p>
+
+        <div class="row">
+          <button onclick="viewItem()">view_item</button>
+          <button onclick="addToCart()" class="btn-warn">add_to_cart</button>
+          <button onclick="beginCheckout()">begin_checkout</button>
+          <button onclick="purchase()" class="btn-primary">purchase</button>
+          <button onclick="clearEcom()" class="btn-danger">clear ecommerce</button>
+        </div>
+
+        <p class="small">
+          Tip: In GTM Preview, check <span class="muted">Variables → Data Layer</span> to confirm values like
+          <span class="muted">ecommerce.items.0.item_name</span>.
+        </p>
+      </div>
+
+      <!-- RIGHT: Console -->
+      <div class="card">
+        <h2>Live dataLayer console</h2>
+        <div class="console" id="console"></div>
+        <div class="row" style="justify-content: space-between; margin-top: 10px;">
+          <span class="small">This console mirrors dataLayer pushes on this page.</span>
+          <button onclick="clearConsole()">Clear log</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      If your GTM Preview won’t connect, make sure your Pages URL is correct and your container ID is set.
+    </div>
+  </div>
+
+  <script>
+    // --- Helpers ---
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'custom_test_event',
-      feature: 'export_csv',
-      plan: 'pro'
+    let eventCount = 0;
+
+    function nowISO() {
+      return new Date().toISOString();
+    }
+
+    function logToConsole(payload) {
+      const el = document.getElementById('console');
+      const line = document.createElement('div');
+      line.className = 'logline';
+      line.innerHTML =
+        `<span class="tag">${payload.event || 'push'}</span>` +
+        `<span class="muted">${nowISO()}</span><br/>` +
+        `<span>${escapeHtml(JSON.stringify(payload, null, 2)).replace(/\n/g,'<br/>').replace(/ /g,'&nbsp;')}</span>`;
+      el.prepend(line);
+
+      eventCount++;
+      document.getElementById('eventCount').textContent = String(eventCount);
+    }
+
+    function pushDL(payload) {
+      window.dataLayer.push(payload);
+      logToConsole(payload);
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function clearConsole() {
+      document.getElementById('console').innerHTML = '';
+      eventCount = 0;
+      document.getElementById('eventCount').textContent = '0';
+    }
+
+    // --- Basic events ---
+    document.getElementById('cta-btn').addEventListener('click', function() {
+      pushDL({
+        event: 'cta_click',
+        cta_id: 'cta-btn',
+        cta_text: 'Click Me',
+        page_type: 'playground'
+      });
+      alert('cta_click pushed');
     });
-    alert('custom_test_event pushed to dataLayer');
-  }
 
-  document.getElementById('test-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    window.dataLayer.push({
-      event: 'form_submit',
-      email: e.target.email.value,
-      plan: e.target.plan.value
+    function pushCustomEvent() {
+      pushDL({
+        event: 'custom_test_event',
+        feature: 'export_csv',
+        plan: 'pro'
+      });
+      alert('custom_test_event pushed');
+    }
+
+    // --- Auth events ---
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const plan = e.target.plan.value;
+
+      // Example: create a fake internal user id
+      const app_user_id = 'u_' + Math.floor(Math.random() * 1000000);
+
+      pushDL({
+        event: 'sign_up',
+        method: 'email',
+        email: email,
+        plan: plan,
+        app_user_id: app_user_id
+      });
+
+      alert('sign_up pushed (check GTM Preview)');
+      e.target.reset();
     });
-    alert('form_submit event pushed');
-  });
-</script>
 
-<!-- GTM noscript -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const method = e.target.method.value;
 
+      pushDL({
+        event: 'login',
+        method: method,
+        email: email
+      });
+
+      alert('login pushed (check GTM Preview)');
+      e.target.reset();
+    });
+
+    // --- Ecommerce (GA4 style) ---
+    const demoItem = {
+      item_id: "SKU_12345",
+      item_name: "Ocean-Friendly T-Shirt",
+      item_brand: "Anchor",
+      item_category: "Apparel",
+      item_variant: "Black",
+      price: 299.00,
+      quantity: 1
+    };
+
+    function viewItem() {
+      pushDL({
+        event: 'view_item',
+        currency: 'ZAR',
+        value: 299.00,
+        ecommerce: {
+          items: [demoItem]
+        }
+      });
+    }
+
+    function addToCart() {
+      pushDL({
+        event: 'add_to_cart',
+        currency: 'ZAR',
+        value: 299.00,
+        ecommerce: {
+          items: [demoItem]
+        }
+      });
+    }
+
+    function beginCheckout() {
+      pushDL({
+        event: 'begin_checkout',
+        currency: 'ZAR',
+        value: 299.00,
+        ecommerce: {
+          items: [demoItem]
+        }
+      });
+    }
+
+    function purchase() {
+      const transaction_id = "T_" + Math.floor(Math.random() * 1000000000);
+
+      pushDL({
+        event: 'purchase',
+        transaction_id: transaction_id,
+        currency: 'ZAR',
+        value: 299.00,
+        tax: 0,
+        shipping: 0,
+        coupon: '',
+        ecommerce: {
+          items: [demoItem]
+        }
+      });
+      alert('purchase pushed: ' + transaction_id);
+    }
+
+    function clearEcom() {
+      // Common practice so old ecommerce data doesn't “stick”
+      pushDL({
+        event: 'clear_ecommerce',
+        ecommerce: null
+      });
+      alert('ecommerce cleared');
+    }
+
+    // Start console with page_view
+    pushDL({
+      event: 'page_view',
+      page_type: 'playground',
+      page_title: document.title
+    });
+  </script>
 </body>
 </html>
