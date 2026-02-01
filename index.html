@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>GTM Test Playground</title>
+  <title>GTM Event Playground (Table Events Only)</title>
 
   <!-- Google Tag Manager -->
   <script>
@@ -38,380 +39,335 @@
       padding: 40px 18px;
     }
 
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      gap: 16px;
-    }
+    .wrap{ max-width: 1100px; margin: 0 auto; display: grid; gap: 16px; }
 
     header{
-      display:flex;
-      align-items:flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 18px 8px;
+      display:flex; align-items:flex-start; justify-content: space-between;
+      gap: 16px; padding: 18px 18px 8px;
     }
 
-    h1{
-      font-size: 28px;
-      margin: 0 0 6px;
-      letter-spacing: .2px;
-    }
-    .subtitle{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.45;
-      max-width: 62ch;
-    }
+    h1{ font-size: 28px; margin: 0 0 6px; letter-spacing: .2px; }
+    .subtitle{ margin:0; color: var(--muted); line-height: 1.45; max-width: 70ch; }
 
-    .pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      padding: 8px 10px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
-    }
-    @media (max-width: 920px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
     .card{
-      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      grid-column: span 12;
       border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 16px;
+      overflow: hidden;
     }
     .card h2{
+      margin:0;
       font-size: 16px;
-      margin: 0 0 10px;
-      color: rgba(255,255,255,.9);
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      letter-spacing: .2px;
     }
+    .card .content{ padding: 16px; display:grid; gap: 12px; }
 
-    .row{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    button{
-      appearance:none;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
-      color: var(--text);
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform .06s ease, background .2s ease, border-color .2s ease;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    button:hover{ background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)); }
-    button:active{ transform: translateY(1px); }
-
-    .btn-primary{
-      border-color: rgba(34,197,94,.45);
-      background: linear-gradient(180deg, rgba(34,197,94,.25), rgba(34,197,94,.08));
-    }
-
-    .btn-warn{
-      border-color: rgba(251,191,36,.45);
-      background: linear-gradient(180deg, rgba(251,191,36,.22), rgba(251,191,36,.08));
-    }
-
-    .btn-danger{
-      border-color: rgba(239,68,68,.45);
-      background: linear-gradient(180deg, rgba(239,68,68,.22), rgba(239,68,68,.08));
-    }
-
+    .row{ display:flex; gap: 10px; flex-wrap: wrap; align-items:center; }
+    label{ font-size: 13px; color: var(--muted); }
     input, select{
+      background: rgba(255,255,255,.06);
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
       color: var(--text);
-      padding: 10px 12px;
       border-radius: 12px;
+      padding: 10px 12px;
       min-width: 220px;
       outline: none;
     }
     input::placeholder{ color: rgba(255,255,255,.55); }
+    button{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    button:hover{ background: rgba(255,255,255,.12); }
 
-    label{
-      color: var(--muted);
+    .hint{
       font-size: 13px;
-      display:block;
-      margin-bottom: 6px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction: column;
-      gap: 6px;
-      margin: 8px 0;
-      min-width: 240px;
-    }
-
-    .small{
-      font-size: 12px;
       color: var(--muted);
-      margin-top: 8px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    .console{
-      background: rgba(0,0,0,.35);
+    .log{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      background: rgba(0,0,0,.25);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 12px;
-      height: 420px;
-      overflow:auto;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      color: rgba(255,255,255,.88);
-    }
-    .logline{ margin: 0 0 8px; }
-    .tag{
-      display:inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      margin-right: 8px;
-      color: rgba(255,255,255,.8);
-    }
-    .muted{ color: rgba(255,255,255,.65); }
-    .divider{
-      height:1px;
-      background: var(--border);
-      margin: 12px 0;
-    }
-    .footer{
-      color: var(--muted);
-      font-size: 12px;
-      padding: 8px 18px 0;
+      max-height: 260px;
+      overflow: auto;
     }
 
-    a{ color: rgba(56,189,248,.95); }
+    @media (min-width: 900px){
+      .card.half{ grid-column: span 6; }
+    }
   </style>
 </head>
-
 <body>
-  <!-- GTM noscript -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHKBQ57C"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHKBQ57C"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End GTM (noscript) -->
 
   <div class="wrap">
-    <header class="card">
+    <header>
       <div>
-        <h1>GTM Test Playground</h1>
+        <h1>GTM Event Playground</h1>
         <p class="subtitle">
-          A safe sandbox for testing tags, triggers, variables, ecommerce, and custom dataLayer events.
-          Use GTM Preview to see exactly what fires.
+          This page is intentionally limited to the events from your tracking table only:
+          <strong>app_download_cta</strong>, <strong>app_install</strong>, <strong>sign_up</strong>,
+          <strong>add_user_info</strong>, <strong>login</strong>, <strong>add_payment_info</strong>,
+          <strong>begin_checkout</strong>, <strong>forgot_password</strong>.
         </p>
-      </div>
-      <div class="pill">
-        <span>dataLayer events:</span>
-        <span id="eventCount" style="color:rgba(255,255,255,.9);font-weight:700;">0</span>
       </div>
     </header>
 
     <div class="grid">
-      <!-- LEFT: Controls -->
-      <div class="card">
-        <h2>1) Basics</h2>
-        <div class="row">
-          <button id="cta-btn" class="btn-primary">CTA Click</button>
-          <button onclick="pushCustomEvent()" class="btn-warn">Push Custom Event</button>
-          <a href="https://example.com" target="_blank" rel="noopener">Outbound Link → example.com</a>
-        </div>
-
-        <div class="divider"></div>
-
-        <h2>2) Auth Events (Signup / Login)</h2>
-
-        <form id="signup-form" autocomplete="off">
+      <section class="card half" aria-label="Acquisition">
+        <h2>Acquisition</h2>
+        <div class="content">
           <div class="row">
-            <div class="field">
-              <label>Signup Email</label>
-              <input type="email" name="email" placeholder="name@email.com" required />
-            </div>
+            <label for="platform">Platform</label>
+            <select id="platform">
+              <option value="app_store">App Store</option>
+              <option value="google_play">Google Play</option>
+            </select>
 
-            <div class="field">
-              <label>Plan</label>
-              <select name="plan">
-                <option value="free">Free</option>
-                <option value="pro">Pro</option>
-              </select>
-            </div>
-
-            <div class="field" style="min-width:180px;">
-              <label>&nbsp;</label>
-              <button type="submit" class="btn-primary">Signup</button>
-            </div>
+            <label for="location">Button location</label>
+            <select id="location">
+              <option value="pricing_footer">Pricing footer CTA</option>
+              <option value="pricing_hero">Pricing hero CTA</option>
+              <option value="homepage">Homepage CTA</option>
+            </select>
           </div>
-        </form>
 
-        <form id="login-form" autocomplete="off">
           <div class="row">
-            <div class="field">
-              <label>Login Email</label>
-              <input type="email" name="email" placeholder="name@email.com" required />
-            </div>
-
-            <div class="field">
-              <label>Method</label>
-              <select name="method">
-                <option value="password">Password</option>
-                <option value="magic_link">Magic Link</option>
-                <option value="google">Google</option>
-                <option value="apple">Apple</option>
-              </select>
-            </div>
-
-            <div class="field" style="min-width:180px;">
-              <label>&nbsp;</label>
-              <button type="submit">Login</button>
-            </div>
+            <label for="linkUrl">Link URL</label>
+            <input id="linkUrl" type="url" value="https://example.com/app" />
+            <button id="downloadBtn" type="button">Trigger app_download_cta</button>
           </div>
-        </form>
 
-        <div class="divider"></div>
-
-        <h2>3) Ecommerce Events (GA4 style)</h2>
-        <p class="small">
-          These pushes follow GA4 ecommerce structures (<span class="muted">items[], currency, value, transaction_id</span>).
-          Use them to test GA4 event tags + parameter mapping in GTM.
-        </p>
-
-        <div class="row">
-          <button onclick="viewItem()">view_item</button>
-          <button onclick="addToCart()" class="btn-warn">add_to_cart</button>
-          <button onclick="beginCheckout()">begin_checkout</button>
-          <button onclick="purchase()" class="btn-primary">purchase</button>
-          <button onclick="clearEcom()" class="btn-danger">clear ecommerce</button>
+          <p class="hint">
+            This simulates a user clicking the App Store / Google Play download CTA.
+          </p>
         </div>
+      </section>
 
-        <p class="small">
-          Tip: In GTM Preview, check <span class="muted">Variables → Data Layer</span> to confirm values like
-          <span class="muted">ecommerce.items.0.item_name</span>.
-        </p>
-      </div>
-
-      <!-- RIGHT: Console -->
-      <div class="card">
-        <h2>Live dataLayer console</h2>
-        <div class="console" id="console"></div>
-        <div class="row" style="justify-content: space-between; margin-top: 10px;">
-          <span class="small">This console mirrors dataLayer pushes on this page.</span>
-          <button onclick="clearConsole()">Clear log</button>
+      <section class="card half" aria-label="Install">
+        <h2>Install</h2>
+        <div class="content">
+          <div class="row">
+            <button id="installBtn" type="button">Trigger app_install</button>
+            <button id="resetInstallBtn" type="button">Reset install flag</button>
+          </div>
+          <p class="hint">
+            In a real app, <strong>app_install</strong> is usually automatic on first open. On this page,
+            it triggers automatically once per session and you can also trigger it manually for testing.
+          </p>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="footer">
-      If your GTM Preview won’t connect, make sure your Pages URL is correct and your container ID is set.
+      <section class="card half" aria-label="Auth">
+        <h2>Authentication</h2>
+        <div class="content">
+          <form id="signupForm" class="row" autocomplete="off">
+            <label for="signupMethod">sign_up method</label>
+            <select id="signupMethod" name="method">
+              <option value="email">email</option>
+              <option value="google">google</option>
+              <option value="apple">apple</option>
+            </select>
+
+            <label for="signupEmail">Email</label>
+            <input id="signupEmail" name="email" type="email" placeholder="name@example.com" required />
+            <button type="submit">Trigger sign_up</button>
+          </form>
+
+          <form id="loginForm" class="row" autocomplete="off">
+            <label for="loginMethod">login method</label>
+            <select id="loginMethod" name="method">
+              <option value="email">email</option>
+              <option value="google">google</option>
+              <option value="apple">apple</option>
+            </select>
+
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" name="email" type="email" placeholder="name@example.com" required />
+            <button type="submit">Trigger login</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="card half" aria-label="Onboarding">
+        <h2>Onboarding</h2>
+        <div class="content">
+          <div class="row">
+            <label for="profileStep">profile_step</label>
+            <select id="profileStep">
+              <option value="profile">profile</option>
+              <option value="preferences">preferences</option>
+              <option value="onboarding">onboarding</option>
+            </select>
+            <button id="userInfoBtn" type="button">Trigger add_user_info</button>
+          </div>
+
+          <p class="hint">
+            Use this after a user successfully saves a profile step.
+          </p>
+        </div>
+      </section>
+
+      <section class="card half" aria-label="Billing">
+        <h2>Billing</h2>
+        <div class="content">
+          <div class="row">
+            <label for="paymentType">payment_type</label>
+            <select id="paymentType">
+              <option value="card">card</option>
+              <option value="paypal">paypal</option>
+              <option value="bank_transfer">bank_transfer</option>
+            </select>
+            <button id="paymentBtn" type="button">Trigger add_payment_info</button>
+          </div>
+
+          <div class="row">
+            <label for="planType">plan_type</label>
+            <select id="planType">
+              <option value="monthly">monthly</option>
+              <option value="annual">annual</option>
+              <option value="trial">trial</option>
+            </select>
+            <button id="checkoutBtn" type="button">Trigger begin_checkout</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card half" aria-label="Support">
+        <h2>Support</h2>
+        <div class="content">
+          <form id="forgotForm" class="row" autocomplete="off">
+            <label for="forgotEmail">Email</label>
+            <input id="forgotEmail" name="email" type="email" placeholder="name@example.com" required />
+            <button type="submit">Trigger forgot_password</button>
+          </form>
+
+          <p class="hint">
+            Use this when a user submits a reset request (even if the reset later fails).
+          </p>
+        </div>
+      </section>
+
+      <section class="card" aria-label="Debug Log">
+        <h2>Debug Log</h2>
+        <div class="content">
+          <div class="row">
+            <button id="clearLogBtn" type="button">Clear log</button>
+          </div>
+          <div id="log" class="log">Waiting for events…</div>
+          <p class="hint">
+            Open GTM Preview and the browser console to confirm events are landing as expected.
+          </p>
+        </div>
+      </section>
     </div>
   </div>
 
   <script>
-    // --- Helpers ---
+    // Safe dataLayer push helper + on-page log
     window.dataLayer = window.dataLayer || [];
-    let eventCount = 0;
 
-    function nowISO() {
-      return new Date().toISOString();
-    }
-
-    function logToConsole(payload) {
-      const el = document.getElementById('console');
-      const line = document.createElement('div');
-      line.className = 'logline';
-      line.innerHTML =
-        `<span class="tag">${payload.event || 'push'}</span>` +
-        `<span class="muted">${nowISO()}</span><br/>` +
-        `<span>${escapeHtml(JSON.stringify(payload, null, 2)).replace(/\n/g,'<br/>').replace(/ /g,'&nbsp;')}</span>`;
-      el.prepend(line);
-
-      eventCount++;
-      document.getElementById('eventCount').textContent = String(eventCount);
+    function logLine(obj) {
+      const el = document.getElementById('log');
+      const line = JSON.stringify(obj, null, 2);
+      if (el.textContent.trim() === "Waiting for events…") el.textContent = "";
+      el.textContent = el.textContent + (el.textContent ? "\n\n" : "") + line;
     }
 
     function pushDL(payload) {
       window.dataLayer.push(payload);
-      logToConsole(payload);
+      console.log("dataLayer push:", payload);
+      logLine(payload);
     }
 
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
+    // --- Events (table-only) ---
 
-    function clearConsole() {
-      document.getElementById('console').innerHTML = '';
-      eventCount = 0;
-      document.getElementById('eventCount').textContent = '0';
-    }
+    // app_download_cta
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const platform = document.getElementById('platform').value;
+      const link_url = document.getElementById('linkUrl').value;
+      const button_location = document.getElementById('location').value;
 
-    // --- Basic events ---
-    document.getElementById('cta-btn').addEventListener('click', function() {
       pushDL({
-        event: 'cta_click',
-        cta_id: 'cta-btn',
-        cta_text: 'Click Me',
-        page_type: 'playground'
+        event: 'app_download_cta',
+        app_platform: platform,
+        link_url: link_url,
+        button_location: button_location
       });
-      alert('cta_click pushed');
+      alert('app_download_cta pushed (check GTM Preview)');
     });
 
-    function pushCustomEvent() {
-      pushDL({
-        event: 'custom_test_event',
-        feature: 'export_csv',
-        plan: 'pro'
-      });
-      alert('custom_test_event pushed');
+    // app_install (simulate first open)
+    function fireAppInstall() {
+      pushDL({ event: 'app_install' });
     }
 
-    // --- Auth events ---
-    document.getElementById('signup-form').addEventListener('submit', function(e) {
+    // Automatically fire once per session (to mimic first open)
+    const installKey = 'app_install_fired';
+    if (!sessionStorage.getItem(installKey)) {
+      fireAppInstall();
+      sessionStorage.setItem(installKey, '1');
+    }
+
+    document.getElementById('installBtn').addEventListener('click', function() {
+      fireAppInstall();
+      alert('app_install pushed (check GTM Preview)');
+    });
+
+    document.getElementById('resetInstallBtn').addEventListener('click', function() {
+      sessionStorage.removeItem(installKey);
+      alert('Install flag reset. Reload page to auto-fire app_install again.');
+    });
+
+    // sign_up
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = e.target.email.value;
-      const plan = e.target.plan.value;
-
-      // Example: create a fake internal user id
-      const app_user_id = 'u_' + Math.floor(Math.random() * 1000000);
+      const method = e.target.method.value;
 
       pushDL({
         event: 'sign_up',
-        method: 'email',
-        email: email,
-        plan: plan,
-        app_user_id: app_user_id
+        method: method,
+        email: email
       });
 
       alert('sign_up pushed (check GTM Preview)');
       e.target.reset();
     });
 
-    document.getElementById('login-form').addEventListener('submit', function(e) {
+    // add_user_info
+    document.getElementById('userInfoBtn').addEventListener('click', function() {
+      const profile_step = document.getElementById('profileStep').value;
+
+      pushDL({
+        event: 'add_user_info',
+        profile_step: profile_step
+      });
+
+      alert('add_user_info pushed (check GTM Preview)');
+    });
+
+    // login
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = e.target.email.value;
       const method = e.target.method.value;
@@ -426,82 +382,47 @@
       e.target.reset();
     });
 
-    // --- Ecommerce (GA4 style) ---
-    const demoItem = {
-      item_id: "SKU_12345",
-      item_name: "Ocean-Friendly T-Shirt",
-      item_brand: "Anchor",
-      item_category: "Apparel",
-      item_variant: "Black",
-      price: 299.00,
-      quantity: 1
-    };
+    // add_payment_info
+    document.getElementById('paymentBtn').addEventListener('click', function() {
+      const payment_type = document.getElementById('paymentType').value;
 
-    function viewItem() {
       pushDL({
-        event: 'view_item',
-        currency: 'ZAR',
-        value: 299.00,
-        ecommerce: {
-          items: [demoItem]
-        }
+        event: 'add_payment_info',
+        payment_type: payment_type
       });
-    }
 
-    function addToCart() {
-      pushDL({
-        event: 'add_to_cart',
-        currency: 'ZAR',
-        value: 299.00,
-        ecommerce: {
-          items: [demoItem]
-        }
-      });
-    }
+      alert('add_payment_info pushed (check GTM Preview)');
+    });
 
-    function beginCheckout() {
+    // begin_checkout
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      const plan_type = document.getElementById('planType').value;
+
       pushDL({
         event: 'begin_checkout',
-        currency: 'ZAR',
-        value: 299.00,
-        ecommerce: {
-          items: [demoItem]
-        }
+        plan_type: plan_type
       });
-    }
 
-    function purchase() {
-      const transaction_id = "T_" + Math.floor(Math.random() * 1000000000);
+      alert('begin_checkout pushed (check GTM Preview)');
+    });
+
+    // forgot_password
+    document.getElementById('forgotForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = e.target.email.value;
 
       pushDL({
-        event: 'purchase',
-        transaction_id: transaction_id,
-        currency: 'ZAR',
-        value: 299.00,
-        tax: 0,
-        shipping: 0,
-        coupon: '',
-        ecommerce: {
-          items: [demoItem]
-        }
+        event: 'forgot_password',
+        email: email
       });
-      alert('purchase pushed: ' + transaction_id);
-    }
 
-    function clearEcom() {
-      // Common practice so old ecommerce data doesn't “stick”
-      pushDL({
-        event: 'clear_ecommerce',
-        ecommerce: null
-      });
-      alert('ecommerce cleared');
-    }
+      alert('forgot_password pushed (check GTM Preview)');
+      e.target.reset();
+    });
 
-    // Start console with page_view
-    pushDL({
-      event: 'page_view',
-      page_type: 'playground',
-      page_title: document.title
+    // UI helpers
+    document.getElementById('clearLogBtn').addEventListener('click', function() {
+      document.getElementById('log').textContent = "Waiting for events…";
     });
   </script>
 </body>
